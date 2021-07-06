@@ -21,7 +21,7 @@ function CalcDisplay(props) {
                 </div>
                 <div className="row">
                     <Buttons symbol="0" onClickFunction={props.displayNumber} />
-                    <Buttons symbol="," onClickFunction={props.displayNumber} />
+                    <Buttons symbol="." onClickFunction={props.displayNumber} />
                     <Buttons symbol="+" onClickFunction={props.operators} />
                 </div>
                 <div className="row">
