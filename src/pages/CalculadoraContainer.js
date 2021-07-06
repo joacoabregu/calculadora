@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
 import CalcDisplay from './CalcDisplay';
 function Container(){
@@ -6,37 +6,59 @@ function Container(){
     let [calculo, setCalculo] = useState(0);
     let [prevNumb, setPrevNumb] = useState("");
     let [nextNumb, setNextNumb] = useState("");
+    let [operatorValue, setOperatorValue] = useState("");
+    let [pushOperator, setPushOperator] = useState(true);
 
-    let [pushOperator, setPushOperator] = useState(false)
+    useEffect(() => {
+        if(pushOperator){
+            
+            setPrevNumb(display)
 
+
+        } else {
+            setNextNumb(display)
+            
+            
+        }
+    }, [display, pushOperator])
+    useEffect(() =>{
+        setDisplay(calculo)
+    }, [calculo])
+
+    console.log(prevNumb, nextNumb, operatorValue)
     function displayNumber(e){
         if(pushOperator){
             setDisplay( e.currentTarget.childNodes[0].innerHTML)
+            
             setPushOperator(false)
+
         } else {
             setDisplay(display + e.currentTarget.childNodes[0].innerHTML)
+            
         }
     }
     function operators(e){
         let operator = e.currentTarget.childNodes[0].innerHTML;
+        setOperatorValue(operator)
         setPushOperator(true)
-        if(!calculo){
-            setCalculo(Number(display));
-            return;
-        }
-        console.log(operator)
+        
+
+        
+    }
+
+    function calculate(firstValue, operator, secondValue){
         switch(operator){
             case "+":
-                setCalculo(calculo + Number(display));
+                setCalculo(Number(firstValue) + Number(secondValue));
                 break;
             case "-":
-                setCalculo(calculo - Number(display));
+                setCalculo(Number(firstValue) - Number(secondValue));
                 break;
             case "*":
-                setCalculo(calculo * Number(display));
+                setCalculo(Number(firstValue) * Number(secondValue));
                 break;    
             case "/":
-                setCalculo(calculo / Number(display));
+                setCalculo(Number(firstValue) / Number(secondValue));                
                 break;
             default:
                 setCalculo(display)
@@ -46,23 +68,23 @@ function Container(){
     }
     function reset(e){
         setDisplay("");
+        setNextNumb("");
+        setPrevNumb("");
+        setOperatorValue("");
         setCalculo(0);
     }
     function equal(e){
+        calculate(prevNumb, operatorValue, nextNumb);
         setDisplay(calculo)
     }
-    let displayValue;
-    if(display){
-        displayValue= display;
-    } else {
-        displayValue = "0";
-    }
+    
+    
 
     return (
         <section className="container">
             <div className="wrapper">
                 <div id="display">
-                    {displayValue}
+                    {display}
                     
                 </div>
                 <CalcDisplay display={display} displayNumber={displayNumber} operators={operators} reset={reset} equal={equal}/>  
