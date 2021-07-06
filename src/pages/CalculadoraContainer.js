@@ -44,16 +44,16 @@ function Container(){
     function calculate(firstValue, operator, secondValue){
         switch(operator){
             case "+":
-                setTotal(Number(firstValue) + Number(secondValue));
+                setTotal(parseFloat(firstValue) + parseFloat(secondValue));
                 break;
             case "-":
-                setTotal(Number(firstValue) - Number(secondValue));
+                setTotal(parseFloat(firstValue) - parseFloat(secondValue));
                 break;
             case "*":
-                setTotal(Number(firstValue) * Number(secondValue));
+                setTotal(parseFloat(firstValue) * parseFloat(secondValue));
                 break;    
             case "/":
-                setTotal(Number(firstValue) / Number(secondValue));                
+                setTotal(parseFloat(firstValue) / parseFloat(secondValue));                
                 break;
             default:
                 setTotal(display)
