@@ -3,7 +3,7 @@ import CalcDisplay from './CalcDisplay';
 
 function Container(){
     let [display, setDisplay] = useState("");
-    let [total, setTotal] = useState(0);
+    let [total, setTotal] = useState("0");
     let [prevNumb, setPrevNumb] = useState("");
     let [nextNumb, setNextNumb] = useState("");
     let [operatorValue, setOperatorValue] = useState("");
@@ -11,31 +11,34 @@ function Container(){
 
     useEffect(() => {
         if(pushOperator){          
-            setPrevNumb(display)
+            setPrevNumb(display);
         } else {
-            setNextNumb(display)                
+            setNextNumb(display);                
         }
     }, [display, pushOperator])
 
     useEffect(() =>{
-        setDisplay(total)
+        setDisplay(total);
     }, [total])
 
-    console.log(prevNumb, nextNumb, operatorValue)
+    console.log(prevNumb, nextNumb, operatorValue, pushOperator)
     function displayNumber(e){
         if(pushOperator){
-            setDisplay( e.currentTarget.childNodes[0].innerHTML)            
-            setPushOperator(false)
+            setDisplay( e.currentTarget.childNodes[0].innerHTML);            
+            setPushOperator(false);
         } else {
-            setDisplay(display + e.currentTarget.childNodes[0].innerHTML)            
+            setDisplay(display + e.currentTarget.childNodes[0].innerHTML);            
         }
     }
 
     function operators(e){
-        calculate(prevNumb, operatorValue, nextNumb);
+        if(!pushOperator){
+            calculate(prevNumb, operatorValue, nextNumb);
+        }
+        
         let operator = e.currentTarget.childNodes[0].innerHTML;
-        setOperatorValue(operator)
-        setPushOperator(true)           
+        setOperatorValue(operator);
+        setPushOperator(true);           
     }
 
     function calculate(firstValue, operator, secondValue){
@@ -63,11 +66,13 @@ function Container(){
         setNextNumb("");
         setPrevNumb("");
         setOperatorValue("");
-        setTotal(0);
+        setTotal("0");
+        setPushOperator(true);           
     }
     function equal(e){
         calculate(prevNumb, operatorValue, nextNumb);
         setDisplay(total)
+        setPushOperator(true);           
     }
     
         return (
