@@ -1,67 +1,59 @@
-import {useState, useEffect} from 'react'
-
+import {useState, useEffect} from 'react';
 import CalcDisplay from './CalcDisplay';
+
 function Container(){
     let [display, setDisplay] = useState("");
-    let [calculo, setCalculo] = useState(0);
+    let [total, setTotal] = useState(0);
     let [prevNumb, setPrevNumb] = useState("");
     let [nextNumb, setNextNumb] = useState("");
     let [operatorValue, setOperatorValue] = useState("");
     let [pushOperator, setPushOperator] = useState(true);
 
     useEffect(() => {
-        if(pushOperator){
-            
+        if(pushOperator){          
             setPrevNumb(display)
-
-
         } else {
-            setNextNumb(display)
-            
-            
+            setNextNumb(display)                
         }
     }, [display, pushOperator])
+
     useEffect(() =>{
-        setDisplay(calculo)
-    }, [calculo])
+        setDisplay(total)
+    }, [total])
 
     console.log(prevNumb, nextNumb, operatorValue)
     function displayNumber(e){
         if(pushOperator){
-            setDisplay( e.currentTarget.childNodes[0].innerHTML)
-            
+            setDisplay( e.currentTarget.childNodes[0].innerHTML)            
             setPushOperator(false)
-
         } else {
-            setDisplay(display + e.currentTarget.childNodes[0].innerHTML)
-            
+            setDisplay(display + e.currentTarget.childNodes[0].innerHTML)            
         }
     }
+
     function operators(e){
+        calculate(prevNumb, operatorValue, nextNumb);
         let operator = e.currentTarget.childNodes[0].innerHTML;
         setOperatorValue(operator)
-        setPushOperator(true)
-        
-
-        
+        setPushOperator(true)           
     }
 
     function calculate(firstValue, operator, secondValue){
         switch(operator){
             case "+":
-                setCalculo(Number(firstValue) + Number(secondValue));
+                setTotal(Number(firstValue) + Number(secondValue));
                 break;
             case "-":
-                setCalculo(Number(firstValue) - Number(secondValue));
+                setTotal(Number(firstValue) - Number(secondValue));
                 break;
             case "*":
-                setCalculo(Number(firstValue) * Number(secondValue));
+                setTotal(Number(firstValue) * Number(secondValue));
                 break;    
             case "/":
-                setCalculo(Number(firstValue) / Number(secondValue));                
+                setTotal(Number(firstValue) / Number(secondValue));                
                 break;
             default:
-                setCalculo(display)
+                setTotal(display)
                 break;    
 
         }
@@ -71,16 +63,14 @@ function Container(){
         setNextNumb("");
         setPrevNumb("");
         setOperatorValue("");
-        setCalculo(0);
+        setTotal(0);
     }
     function equal(e){
         calculate(prevNumb, operatorValue, nextNumb);
-        setDisplay(calculo)
+        setDisplay(total)
     }
     
-    
-
-    return (
+        return (
         <section className="container">
             <div className="wrapper">
                 <div id="display">
@@ -89,7 +79,7 @@ function Container(){
                 </div>
                 <CalcDisplay display={display} displayNumber={displayNumber} operators={operators} reset={reset} equal={equal}/>  
             </div>
-            {calculo}
+            {total}
         </section>
     )
 }
