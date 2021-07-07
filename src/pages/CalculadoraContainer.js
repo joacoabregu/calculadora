@@ -87,7 +87,12 @@ function Container(){
                 <div id="display">
                     {display}                 
                 </div>
-                <CalcDisplay display={display} displayNumber={displayNumber} operators={operators} reset={reset} equal={equal}/>  
+                <CalcDisplay 
+                    displayNumber={displayNumber}
+                    operators={operators}
+                    reset={reset}
+                    equal={equal}
+                />  
             </div>
         </section>
     )
