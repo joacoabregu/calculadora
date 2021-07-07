@@ -43,6 +43,7 @@
   border-radius: 0.5em;
   margin-bottom: 1em;
   text-align: right;
+  overflow: hidden;
 }
 .button {
   background-color: #81b29a;
