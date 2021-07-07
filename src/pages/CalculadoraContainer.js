@@ -10,6 +10,10 @@ function Container(){
     let [pushOperator, setPushOperator] = useState(true);
 
     useEffect(() => {
+        if(isNaN(display)){       
+            reset();
+            alert("Enter valid number")       
+        }
         if(pushOperator){          
             setPrevNumb(display);
         } else {
@@ -21,7 +25,7 @@ function Container(){
         setDisplay(total);
     }, [total])
 
-    console.log(prevNumb, nextNumb, operatorValue, pushOperator)
+    //console.log(prevNumb, nextNumb, operatorValue, pushOperator)
     function displayNumber(e){
         if(pushOperator){
             setDisplay( e.currentTarget.childNodes[0].innerHTML);            
@@ -61,7 +65,7 @@ function Container(){
 
         }
     }
-    function reset(e){
+    function reset(){
         setDisplay("0");
         setNextNumb("");
         setPrevNumb("");
@@ -74,6 +78,8 @@ function Container(){
         setDisplay(total)
         setPushOperator(true);           
     }
+
+    
     
     return (
         <section className="container">
