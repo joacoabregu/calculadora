@@ -62,7 +62,7 @@ function Container(){
         }
     }
     function reset(e){
-        setDisplay("");
+        setDisplay("0");
         setNextNumb("");
         setPrevNumb("");
         setOperatorValue("");
