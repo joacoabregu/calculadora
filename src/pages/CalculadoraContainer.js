@@ -75,16 +75,14 @@ function Container(){
         setPushOperator(true);           
     }
     
-        return (
+    return (
         <section className="container">
             <div className="wrapper">
                 <div id="display">
-                    {display}
-                    
+                    {display}                 
                 </div>
                 <CalcDisplay display={display} displayNumber={displayNumber} operators={operators} reset={reset} equal={equal}/>  
             </div>
-            {total}
         </section>
     )
 }
