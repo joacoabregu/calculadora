@@ -22,18 +22,16 @@ function CalcDisplay(props) {
                 <div className="row">
                     <Buttons symbol="0" onClickFunction={props.displayNumber} />
                     <Buttons symbol="." onClickFunction={props.displayNumber} />
-                    <Buttons symbol="+" onClickFunction={props.operators} />
+                    <Buttons symbol="+" onClickFunction={props.operators} cssClass={"operators"} />
                 </div>
                 <div className="row">
-                    <Buttons  symbol="-" onClickFunction={props.operators} />
-                    <Buttons symbol="*" onClickFunction={props.operators} />
-                    <Buttons symbol="/" onClickFunction={props.operators} />
+                    <Buttons  symbol="-" onClickFunction={props.operators} cssClass={"operators"} />
+                    <Buttons symbol="*" onClickFunction={props.operators} cssClass={"operators"} />
+                    <Buttons symbol="/" onClickFunction={props.operators} cssClass={"operators"} />
                 </div>
                 <div className="row row-last">
-                    <Buttons  symbol="=" onClickFunction={props.equal} />
-                    <Buttons  symbol="AC" onClickFunction={props.reset} />
-
-                    
+                    <Buttons  symbol="AC" onClickFunction={props.reset} cssClass={"alert"} />
+                    <Buttons  symbol="=" onClickFunction={props.equal} cssClass={"alert"} />                    
                 </div>
         </>
     )
