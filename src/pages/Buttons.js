@@ -1,7 +1,13 @@
 function Buttons(props) {
+    let classes;
+    if(props.cssClass){
+        classes = `button ${props.cssClass}`;
+    }else{
+        classes = 'button'
+    }
     
     return(
-        <div className="button" onClick={props.onClickFunction} >
+        <div className={classes} onClick={props.onClickFunction} >
             <p >{props.symbol}</p>
         </div>
     )
