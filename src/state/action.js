@@ -1,10 +1,12 @@
 import {
-  SET_DISPLAY, 
+  SET_DISPLAY,
+  RESET_DISPLAY, 
   SET_TOTAL, 
-  SET_PREV_NUMB, 
-  SET_NEXT_NUMB, 
+  //SET_PREV_NUMB, 
+  //SET_NEXT_NUMB, 
   SET_OPERATOR,
-  SET_PUSH} from './actionTypes';
+  //SET_PUSH,
+  RESET} from './actionTypes';
 
 
 export function setDisplay(payload) {
@@ -14,6 +16,13 @@ export function setDisplay(payload) {
     }
 }
 
+export function resetDisplay(payload) {
+  return {
+    type: RESET_DISPLAY,
+    payload
+  }
+}
+
 export function setTotal(payload) {
     return {
       type: SET_TOTAL,
@@ -21,7 +30,7 @@ export function setTotal(payload) {
     }
 }
 
-export function setPrevNumb(payload) {
+/* export function setPrevNumb(payload) {
     return {
       type: SET_PREV_NUMB,
       payload
@@ -33,7 +42,7 @@ export function setNextNumb(payload) {
       type: SET_NEXT_NUMB,
       payload
     }
-}
+} */
 
 export function setOperator(payload) {
     return {
@@ -42,9 +51,16 @@ export function setOperator(payload) {
     }
 }
 
-export function setPush(payload) {
+/* export function setPush(payload) {
     return {
       type: SET_PUSH,
       payload
     }
+} */
+
+export function reset() {
+  return {
+    type: RESET,
+    
+  }
 }
