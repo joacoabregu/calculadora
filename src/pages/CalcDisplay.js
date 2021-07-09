@@ -1,66 +1,29 @@
 import { connect } from 'react-redux';
 import Buttons from './Buttons';
-import {setDisplay, setTotal,setPrevNumb, setNextNumb, setOperator, setPush} from '../state/action'
+import {setDisplay, resetDisplay, setTotal, setOperator,  reset} from '../state/action'
 
 
 function CalcDisplay(props) {
     
     function displayNumber(e){
-        if(props.pushOperator){
-            //setDisplay( e.currentTarget.childNodes[0].innerHTML);
-            props.dispatch(setDisplay(e.currentTarget.childNodes[0].innerHTML))
-            props.dispatch(setPrevNumb(props.display));            
-            props.dispatch(setPush(true))
+        if(!props.pushOperator){
+            props.dispatch(resetDisplay(e.currentTarget.childNodes[0].innerHTML));
         } else {
-            //setDisplay(props.display + e.currentTarget.childNodes[0].innerHTML);
-            props.dispatch(setDisplay(e.currentTarget.childNodes[0].innerHTML))
-            props.dispatch(setNextNumb(props.display));            
+            props.dispatch(setDisplay(e.currentTarget.childNodes[0].innerHTML));
+
         }
-    }
+    } 
 
     function operators(e){
-        if(!props.pushOperator){
-            calculate(props.prevNumb, props.operatorValue, props.nextNumb);
-        }
-        
         let operator = e.currentTarget.childNodes[0].innerHTML;
-        props.dispatch(setOperator(operator));    
-        props.dispatch(setPush(true));           
+        props.dispatch(setOperator(operator));                   
     }
-    function calculate(firstValue, operator, secondValue){
-        switch(operator){
-            case "+":
-                props.dispatch(setTotal(parseFloat(firstValue) + parseFloat(secondValue)));
-                break;
-            case "-":
-                props.dispatch(setTotal(parseFloat(firstValue) - parseFloat(secondValue)));
-                break;
-            case "*":
-                props.dispatch(setTotal(parseFloat(firstValue) * parseFloat(secondValue)));
-                break;    
-            case "/":
-                props.dispatch(setTotal(parseFloat(firstValue) / parseFloat(secondValue)));                
-                break;
-            default:
-                props.dispatch(setTotal(props.display));
-                break;    
-
-        }
-    }
-
-    function reset(){
-        props.dispatch(setDisplay("0"));            
-        props.dispatch(setNextNumb(""));            
-        props.dispatch(setPrevNumb(""));            
-        props.dispatch(setOperator(""));            
-        props.dispatch(setTotal("0"));            
-        props.dispatch(setPush(true));            
-                           
+    
+    function resetAll(){
+        props.dispatch(reset());                                              
     }
     function equal(){
-        calculate(props.prevNumb, props.operatorValue, props.nextNumb);
-        props.dispatch(setDisplay(props.total));
-        props.dispatch(setPush(true));           
+        props.dispatch(setTotal())           
     }
     
 
@@ -92,7 +55,7 @@ function CalcDisplay(props) {
                     <Buttons symbol="/" onClickFunction={operators} cssClass={"operators"} />
                 </div>
                 <div className="row row-last">
-                    <Buttons  symbol="AC" onClickFunction={reset} cssClass={"alert"} />
+                    <Buttons  symbol="AC" onClickFunction={resetAll} cssClass={"alert"} />
                     <Buttons  symbol="=" onClickFunction={equal} cssClass={"alert"} />                    
                 </div>
         </>
@@ -101,11 +64,7 @@ function CalcDisplay(props) {
 
 function mapStateToProps(state) {
     return {
-        display: state.displayReducer,
-        total: state.totalReducer,
-        pushOperator: state.pushReducer,
-        prevNumb: state.prevNumbReducer,
-        nextNumb: state.nextNumbReducer
+        pushOperator: state.push,
     }
 }
 
