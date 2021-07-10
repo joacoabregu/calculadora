@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
-import Buttons from './Buttons';
+import ButtonsRow from './ButtonsRow';
 import {setDisplay, resetDisplay, setTotal, setOperator,  reset} from '../state/action'
-
 
 function CalcDisplay(props) {
     
@@ -22,42 +21,40 @@ function CalcDisplay(props) {
     function resetAll(){
         props.dispatch(reset());                                              
     }
+
     function equal(){
         props.dispatch(setTotal())           
     }
-    
+    let buttons = [[
+        {symbol: "1", clickFunction: displayNumber, cssClass: ""},
+        {symbol: "2", clickFunction: displayNumber, cssClass: ""},
+        {symbol: "3", clickFunction: displayNumber, cssClass: ""},
+    ], [
+        {symbol: "4", clickFunction: displayNumber, cssClass: ""},
+        {symbol: "5", clickFunction: displayNumber, cssClass: ""},
+        {symbol: "6", clickFunction: displayNumber, cssClass: ""},
+    ], [
+        {symbol: "7", clickFunction: displayNumber, cssClass: ""},
+        {symbol: "8", clickFunction: displayNumber, cssClass: ""},
+        {symbol: "9", clickFunction: displayNumber, cssClass: ""},
+    ], [
+        {symbol: "0", clickFunction: displayNumber, cssClass: ""},
+        {symbol: ".", clickFunction: displayNumber, cssClass: ""},
+        {symbol: "+", clickFunction: operators, cssClass: "operators"},
+    ], [
+        {symbol: "-", clickFunction: operators, cssClass: "operators"},
+        {symbol: "*", clickFunction: operators, cssClass: "operators"},
+        {symbol: "/", clickFunction: operators, cssClass: "operators"},
+    ], [
+        {symbol: "AC", clickFunction: resetAll, cssClass: "alert"},
+        {symbol: "=", clickFunction: equal, cssClass: "alert"},
+    ]
 
+]
+    
     return (
         <>
-                <div className="row">
-                    <Buttons symbol="1" onClickFunction={displayNumber}/>
-                    <Buttons symbol="2" onClickFunction={displayNumber}/>
-                    <Buttons symbol="3" onClickFunction={displayNumber}/>
-                </div>
-                <div className="row">
-                    <Buttons  symbol="4" onClickFunction={displayNumber}/>
-                    <Buttons symbol="5" onClickFunction={displayNumber} />
-                    <Buttons symbol="6" onClickFunction={displayNumber} />
-                </div>
-                <div className="row">
-                    <Buttons  symbol="7" onClickFunction={displayNumber} />
-                    <Buttons symbol="8" onClickFunction={displayNumber}/>
-                    <Buttons symbol="9" onClickFunction={displayNumber} />
-                </div>
-                <div className="row">
-                    <Buttons symbol="0" onClickFunction={displayNumber} />
-                    <Buttons symbol="." onClickFunction={displayNumber} />
-                    <Buttons symbol="+" onClickFunction={operators} cssClass={"operators"} />
-                </div>
-                <div className="row">
-                    <Buttons  symbol="-" onClickFunction={operators} cssClass={"operators"} />
-                    <Buttons symbol="*" onClickFunction={operators} cssClass={"operators"} />
-                    <Buttons symbol="/" onClickFunction={operators} cssClass={"operators"} />
-                </div>
-                <div className="row row-last">
-                    <Buttons  symbol="AC" onClickFunction={resetAll} cssClass={"alert"} />
-                    <Buttons  symbol="=" onClickFunction={equal} cssClass={"alert"} />                    
-                </div>
+            {buttons.map((array)=> <ButtonsRow buttons={array} /> )}     
         </>
     )
 }
