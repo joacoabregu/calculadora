@@ -32,9 +32,6 @@
   display: flex;
   justify-content: space-between;
 }
-.row-last {
-  justify-content: center;
-}
 
 #display {
   padding: 1em 1em;
@@ -51,6 +48,7 @@
   width: 100%;
   border: 1px solid black;
   border-radius: 0.5em;
+  cursor: pointer;
 }
 
 .alert {
