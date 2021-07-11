@@ -3,6 +3,8 @@ import ButtonsRow from './ButtonsRow';
 import {setDisplay, resetDisplay, setTotal, setOperator,  reset} from '../state/action'
 
 function CalcDisplay(props) {
+
+    
     
     function displayNumber(e){
         if(!props.pushOperator){
@@ -54,7 +56,7 @@ function CalcDisplay(props) {
     
     return (
         <>
-            {buttons.map((array)=> <ButtonsRow buttons={array} /> )}     
+            {buttons.map((array, index)=> <ButtonsRow buttons={array} key={index} /> )}     
         </>
     )
 }
@@ -62,6 +64,7 @@ function CalcDisplay(props) {
 function mapStateToProps(state) {
     return {
         pushOperator: state.push,
+        display: state.display
     }
 }
 
