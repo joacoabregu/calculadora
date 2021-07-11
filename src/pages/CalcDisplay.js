@@ -1,9 +1,21 @@
+import { useEffect} from 'react';
+import { useCallback } from 'react'
 import { connect } from 'react-redux';
 import ButtonsRow from './ButtonsRow';
 import {setDisplay, resetDisplay, setTotal, setOperator,  reset} from '../state/action'
 
 function CalcDisplay(props) {
+    const resetCallback = useCallback(() => {
+        props.dispatch(reset());
+      }, [props])
 
+    useEffect(() => {
+        if(isNaN(props.display)){       
+            resetCallback();
+            alert("Enter valid number")       
+        }
+        
+    }, [props.display, resetCallback])
     
     
     function displayNumber(e){
@@ -23,6 +35,9 @@ function CalcDisplay(props) {
     function resetAll(){
         props.dispatch(reset());                                              
     }
+
+    
+    
 
     function equal(){
         props.dispatch(setTotal())           
